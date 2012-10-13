@@ -22,6 +22,7 @@ import java.io.IOException;
  * General {@link IOException} that indicates a problem occurred while parsing or applying a {@link
  * JSONHandler}.
  */
+@SuppressWarnings("serial")
 public class HandlerException extends IOException {
 
     public HandlerException() {

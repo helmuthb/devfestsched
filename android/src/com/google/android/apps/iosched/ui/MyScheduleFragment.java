@@ -56,7 +56,6 @@ import android.widget.CursorAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import at.devfest.Setup;
 import at.devfest.app.R;
 
 import java.util.ArrayList;

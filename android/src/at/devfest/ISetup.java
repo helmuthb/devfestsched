@@ -1,8 +1,5 @@
 package at.devfest;
 
-import android.annotation.TargetApi;
-import android.os.Build;
-
 
 public interface ISetup {
 

@@ -227,7 +227,8 @@ public class MyScheduleWidgetProvider extends AppWidgetProvider {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private void compatSetRemoteAdapter(RemoteViews rv, int appWidgetId, Intent intent) {
         if (UIUtils.hasICS()) {
             rv.setRemoteAdapter(R.id.widget_schedule_list, intent);

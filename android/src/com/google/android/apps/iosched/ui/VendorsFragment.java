@@ -33,7 +33,6 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.text.Spannable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
@@ -41,9 +40,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import at.devfest.app.R;
 
-import static com.google.android.apps.iosched.util.LogUtils.LOGD;
 import static com.google.android.apps.iosched.util.LogUtils.makeLogTag;
-import static com.google.android.apps.iosched.util.UIUtils.buildStyledSnippet;
 
 /**
  * A {@link ListFragment} showing a list of developer sandbox companies.

@@ -17,7 +17,6 @@
 package com.google.android.apps.iosched.ui;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import at.devfest.app.R;
 

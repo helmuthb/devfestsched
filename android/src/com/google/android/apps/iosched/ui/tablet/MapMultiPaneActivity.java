@@ -21,9 +21,6 @@ import com.google.android.apps.iosched.ui.BaseActivity;
 import com.google.android.apps.iosched.ui.MapFragment;
 import com.google.android.apps.iosched.ui.SessionDetailFragment;
 import com.google.android.apps.iosched.ui.SessionsFragment;
-import com.google.android.apps.iosched.ui.VendorDetailFragment;
-import com.google.android.apps.iosched.ui.VendorsFragment;
-
 import android.annotation.TargetApi;
 import android.app.FragmentBreadCrumbs;
 import android.content.Intent;

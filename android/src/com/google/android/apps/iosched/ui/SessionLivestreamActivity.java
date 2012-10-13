@@ -75,7 +75,6 @@ import at.devfest.app.R;
 import java.util.ArrayList;
 
 import static com.google.android.apps.iosched.util.LogUtils.LOGD;
-import static com.google.android.apps.iosched.util.LogUtils.LOGE;
 import static com.google.android.apps.iosched.util.LogUtils.makeLogTag;
 
 /**

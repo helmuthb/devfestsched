@@ -25,9 +25,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SyncResult;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.widget.Toast;
 import at.devfest.app.BuildConfig;
 
 import java.io.IOException;

@@ -21,7 +21,6 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.apps.iosched.provider.ScheduleContract;
 import com.google.android.apps.iosched.ui.BaseActivity;
 import com.google.android.apps.iosched.ui.SessionsFragment;
-import com.google.android.apps.iosched.ui.SocialStreamActivity;
 import com.google.android.apps.iosched.ui.SocialStreamFragment;
 import com.google.android.apps.iosched.ui.TrackInfoHelperFragment;
 import com.google.android.apps.iosched.ui.VendorsFragment;

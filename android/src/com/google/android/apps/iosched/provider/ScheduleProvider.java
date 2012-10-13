@@ -51,7 +51,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.google.android.apps.iosched.util.LogUtils.LOGV;
-import static com.google.android.apps.iosched.util.LogUtils.LOGE;
 import static com.google.android.apps.iosched.util.LogUtils.makeLogTag;
 
 /**
@@ -104,8 +103,6 @@ public class ScheduleProvider extends ContentProvider {
     private static final int ANNOUNCEMENTS_ID = 701;
 
     private static final int SEARCH_SUGGEST = 800;
-
-    private static final String MIME_XML = "text/xml";
 
     /**
      * Build and return a {@link UriMatcher} that catches all {@link Uri}

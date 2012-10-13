@@ -22,7 +22,6 @@ import com.google.android.apps.iosched.appwidget.MyScheduleWidgetProvider;
 import com.google.android.apps.iosched.provider.ScheduleContract;
 import com.google.android.apps.iosched.sync.ScheduleUpdaterService;
 import com.google.android.apps.iosched.ui.MapFragment;
-import com.google.android.apps.iosched.ui.SocialStreamActivity;
 import com.google.android.apps.iosched.ui.SocialStreamFragment;
 
 import com.actionbarsherlock.view.MenuItem;
@@ -35,7 +34,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.service.textservice.SpellCheckerService.Session;
 import android.support.v4.app.ShareCompat;
 import at.devfest.Setup;
 import at.devfest.app.R;

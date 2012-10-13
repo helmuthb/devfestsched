@@ -53,7 +53,6 @@ import at.devfest.Setup;
 import at.devfest.app.BuildConfig;
 import at.devfest.app.R;
 
-import com.google.android.apps.iosched.io.model.Day;
 import com.google.android.apps.iosched.provider.ScheduleContract.Blocks;
 import com.google.android.apps.iosched.provider.ScheduleContract.Rooms;
 

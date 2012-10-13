@@ -18,7 +18,6 @@ package com.google.android.apps.iosched.gcm;
 
 import com.google.android.apps.iosched.Config;
 import com.google.android.apps.iosched.sync.TriggerSyncReceiver;
-import com.google.android.apps.iosched.ui.HomeActivity;
 import com.google.android.apps.iosched.util.UIUtils;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;

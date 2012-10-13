@@ -18,7 +18,6 @@ package com.google.android.apps.iosched.ui.phone;
 
 
 import com.google.android.apps.iosched.provider.ScheduleContract;
-import com.google.android.apps.iosched.ui.HomeActivity;
 import com.google.android.apps.iosched.ui.SimpleSinglePaneActivity;
 import com.google.android.apps.iosched.ui.TrackInfoHelperFragment;
 import com.google.android.apps.iosched.ui.VendorDetailFragment;

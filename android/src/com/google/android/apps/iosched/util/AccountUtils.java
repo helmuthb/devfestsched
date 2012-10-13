@@ -92,7 +92,8 @@ public class AccountUtils {
         public void onAuthTokenAvailable(String authToken);
     }
 
-    public static void tryAuthenticate(Activity activity, AuthenticateCallback callback,
+    @SuppressWarnings("deprecation")
+	public static void tryAuthenticate(Activity activity, AuthenticateCallback callback,
             int activityRequestCode, Account account) {
         //noinspection deprecation
         AccountManager.get(activity).getAuthToken(
@@ -104,7 +105,8 @@ public class AccountUtils {
                 null);
     }
 
-    public static void tryAuthenticateWithErrorNotification(Context context,
+    @SuppressWarnings("deprecation")
+	public static void tryAuthenticateWithErrorNotification(Context context,
             AuthenticateCallback callback, Account account) {
         //noinspection deprecation
         AccountManager.get(context).getAuthToken(
