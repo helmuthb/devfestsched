@@ -42,7 +42,7 @@ public class Config {
 //    private static final String BASE_URL = "http://192.168.178.34:8082/api";
 //    private static final String BASE_URL = "http://192.168.178.42:8082";
 //    private static final String BASE_URL = "http://www.devfest.info/json";
-    private static final String BASE_URL = "http://2012.mkupriyanov.appspot.com/api";
+    private static final String BASE_URL = "http://www.devfest.at/json";
      
     public static final String GET_ALL_SESSIONS_URL      = BASE_URL + "/sessions?parent_event=" + ROOT_EVENT_ID + "&api_key=" + CONFERENCE_API_KEY;
     public static final String GET_ALL_SPEAKERS_URL      = BASE_URL + "/speakers?event_id=" + ROOT_EVENT_ID + "&api_key=" + CONFERENCE_API_KEY;
