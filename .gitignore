@@ -31,3 +31,5 @@ _sandbox
 android/proguard/usage.txt
 
 android/proguard/dump.txt
+
+android/proguard/seeds.txt
