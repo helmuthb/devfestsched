@@ -134,7 +134,7 @@
         Welcome to the DevFest Vienna 2012 app, your official companion to the DevFest Vienna conference
         taking place in Vienna from November 10th to November 11th, 2012.<br>
         <br>
-        <font color="#4683ec"><b>Sign in with the Google account you registered with to
+        <font color="#4683ec"><b>Sign in with a Google account to
         get started</b></font>.
     ]]></string>
     <string name="title_accounts_list">Select a Google account</string>
