@@ -84,6 +84,7 @@ public class SessionDetailFragment extends SherlockFragment implements
     private long mSessionBlockStart;
     private long mSessionBlockEnd;
     private String mTitleString;
+    private String mImageUrl;
     private String mHashtags;
     private String mUrl;
     private String mRoomId;
@@ -103,6 +104,7 @@ public class SessionDetailFragment extends SherlockFragment implements
 
     private TextView mAbstract;
     private TextView mRequirements;
+    private ImageView mImage;
 
     private boolean mSessionCursor = false;
     private boolean mSpeakersCursor = false;
@@ -158,6 +160,8 @@ public class SessionDetailFragment extends SherlockFragment implements
 
         mAbstract = (TextView) mRootView.findViewById(R.id.session_abstract);
         mRequirements = (TextView) mRootView.findViewById(R.id.session_requirements);
+        mImage = (ImageView) mRootView.findViewById(R.id.session_image);
+
 
         if (mVariableHeightHeader) {
             View headerView = mRootView.findViewById(R.id.header_session);
@@ -232,6 +236,7 @@ public class SessionDetailFragment extends SherlockFragment implements
             return;
         }
 
+        mImageUrl = cursor.getString(SessionsQuery.SESSION_IMAGE_URL);
         mTitleString = cursor.getString(SessionsQuery.TITLE);
 
         // Format time block this session occupies
@@ -242,6 +247,11 @@ public class SessionDetailFragment extends SherlockFragment implements
                 mTitleString, mSessionBlockStart, mSessionBlockEnd, mRoomName, getActivity());
 
         mTitle.setText(mTitleString);
+
+        if (!TextUtils.isEmpty(mImageUrl)) {
+            mImageFetcher.loadThumbnailImage(mImageUrl, mImage,
+                    R.drawable.person_image_empty);
+        }
 
         mUrl = cursor.getString(SessionsQuery.URL);
         if (TextUtils.isEmpty(mUrl)) {
@@ -630,7 +640,8 @@ public class SessionDetailFragment extends SherlockFragment implements
      * {@link com.google.android.apps.iosched.provider.ScheduleContract.Sessions} query parameters.
      */
     private interface SessionsQuery {
-        int _TOKEN = 0x1;
+
+		int _TOKEN = 0x1;
 
         String[] PROJECTION = {
                 ScheduleContract.Blocks.BLOCK_START,
@@ -648,6 +659,7 @@ public class SessionDetailFragment extends SherlockFragment implements
                 ScheduleContract.Sessions.SESSION_LIVESTREAM_URL,
                 ScheduleContract.Sessions.ROOM_ID,
                 ScheduleContract.Rooms.ROOM_NAME,
+                ScheduleContract.Sessions.SESSION_IMAGE_URL,
         };
 
         int BLOCK_START = 0;
@@ -665,6 +677,7 @@ public class SessionDetailFragment extends SherlockFragment implements
         int LIVESTREAM_URL = 12;
         int ROOM_ID = 13;
         int ROOM_NAME = 14;
+        int SESSION_IMAGE_URL = 15;
 
         int[] LINKS_INDICES = {
                 URL,

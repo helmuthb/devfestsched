@@ -218,6 +218,7 @@ public class ScheduleDatabase extends SQLiteOpenHelper {
                 + SessionsColumns.SESSION_URL + " TEXT,"
                 + SessionsColumns.SESSION_YOUTUBE_URL + " TEXT,"
                 + SessionsColumns.SESSION_PDF_URL + " TEXT,"
+                + SessionsColumns.SESSION_IMAGE_URL + " TEXT,"
                 + SessionsColumns.SESSION_NOTES_URL + " TEXT,"
                 + SessionsColumns.SESSION_STARRED + " INTEGER NOT NULL DEFAULT 0,"
                 + SessionsColumns.SESSION_CAL_EVENT_ID + " INTEGER,"

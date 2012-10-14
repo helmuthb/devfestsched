@@ -36,6 +36,7 @@ public class Event {
     public String[] youtube_url;
     public String id;
     public String tags;
+    public String thumbnail_url;
     public String[] speaker_id;
     public String[] prereq;
 }

@@ -51,7 +51,7 @@ public class Config {
 
     
     //public static final String BASE_SESSION_URL      =  "https://developers.google.com/events/io/sessions/";
-    public static final String BASE_SESSION_URL      =  BASE_URL + "/events/io/sessions/";
+    public static final String BASE_SESSION_URL      =  "http://www.devfest.at/session/";
     
     // Static file host for the sandbox data
     //public static final String GET_SANDBOX_URL = "https://developers.google.com/events/io/sandbox-data";
@@ -84,7 +84,7 @@ public class Config {
 	public static final String AUTH_TOKEN_SCOPE_READONLY = "https://192.168.178.42/auth/gdgdevfest.readonly";
 	
 	public static final boolean FEATURE_MAP_ENABLED = false;
-	public static final boolean FEATURE_SESSION_URL_ENABLED = false;
+	public static final boolean FEATURE_SESSION_URL_ENABLED = true;
 	public static final boolean FEATURE_PLUSONE_ENABLED = false;
 	
 	public static final String GOOGLE_ANALYTICS = "UA-21611117-5";

@@ -101,6 +101,8 @@ public class ScheduleContract {
         String SESSION_TYPE = "session_type";
         /** Difficulty level of the session. */
         String SESSION_LEVEL = "session_level";
+        /** Thumbnail url for session */
+        String SESSION_IMAGE_URL = "session_image_url";
         /** Title describing this track. */
         String SESSION_TITLE = "session_title";
         /** Body of text explaining this session in detail. */

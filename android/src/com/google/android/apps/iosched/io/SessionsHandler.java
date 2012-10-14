@@ -232,6 +232,7 @@ public class SessionsHandler extends JSONHandler {
                             .withValue(Sessions.SESSION_YOUTUBE_URL, youtubeUrl)
                             .withValue(Sessions.SESSION_PDF_URL, "")
                             .withValue(Sessions.SESSION_NOTES_URL, "")
+                            .withValue(Sessions.SESSION_IMAGE_URL, event.thumbnail_url)
                             .withValue(Sessions.ROOM_ID, sanitizeId(event.room));
 
                     long sessionStartTime = parseTime(event.start_date, event.start_time);
