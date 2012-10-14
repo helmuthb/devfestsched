@@ -131,7 +131,7 @@
 
     <!-- EULA, login, and about -->
     <string name="description_choose_account"><![CDATA[
-        Willkommen zur DevFest Vienna 2012 app, dem offiziellen Begleiter zur DevFest Vienna Konferenz
+        Willkommen zur DevFest Vienna 2012 App, dem offiziellen Begleiter zur DevFest Vienna Konferenz
         in Wien am 10. und 11. November 2012.<br>
         <br>
         <font color="#4683ec"><b>Melde dich mit deinem Google-Account an</b></font>.
@@ -187,7 +187,7 @@
     </plurals>
     <string name="snooze_x_min">Pausiere <xliff:g id="remaining_time">%1$d</xliff:g> min.</string>
 
-    <string name="session_calendar_suffix">- hinzugefügt durch DevFest Vienna 2012 Android app</string>
+    <string name="session_calendar_suffix">- hinzugefügt durch DevFest Vienna 2012 Android App</string>
     <string name="toast_deleting_sessions_from_calendar">Entferne deinen DevFest Vienna 2012 Vorträge aus dem Google Kalender&#8230;</string>
 
     <!-- Contextual help text -->
@@ -244,5 +244,5 @@
     <string name="title_beam">Beam Osterei entsperrt!</string>
     <string name="beam_unlocked_default">Toll, du hast gerade Android Beam verwendet!\n\nVersuche es mal wenn du Vortrags-Details anschaust, um Vorträge mit anderen auf der Konferenz zu teilen.\n\n<i>Zeige Android Beam Osterei</i> wurde auch dem Action Bar des Homescreen der Anwendung hinzugefügt.</string>
     <string name="beam_unlocked_session">Toll, du hast gerade Android Beam verwendet und damit einen Vortrag geteilt!\n\nUm mehr über Android Beam in deinen Anwendungen zu erfahren, berühre <i>Erfahre mehr</i> unten.\n\n <i>Zeige Android Beam Osterei</i> wurde auch dem Action Bar des Homescreen der Anwendung hinzugefügt.</string>
-    <string name="beam_unlocked_help">Das zeigt dass du Android Beam mit der DevFest Vienna 2012 app verwendet hast.\n\nUm mehr über Android Beam in deinen Anwendungen zu erfahren, berühre <i>Erfahre mehr</i> unten.\n\n <i>Zeige Android Beam Osterei</i> wurde auch dem Action Bar des Homescreen der Anwendung hinzugefügt.</string>
+    <string name="beam_unlocked_help">Das zeigt dass du Android Beam mit der DevFest Vienna 2012 App verwendet hast.\n\nUm mehr über Android Beam in deinen Anwendungen zu erfahren, berühre <i>Erfahre mehr</i> unten.\n\n <i>Zeige Android Beam Osterei</i> wurde auch dem Action Bar des Homescreen der Anwendung hinzugefügt.</string>
 </resources>

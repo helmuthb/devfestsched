@@ -87,7 +87,7 @@ public class Config {
 	public static final boolean FEATURE_SESSION_URL_ENABLED = false;
 	public static final boolean FEATURE_PLUSONE_ENABLED = false;
 	
-	public static final String GOOGLE_ANALYTICS = "UA-35397535-1";
+	public static final String GOOGLE_ANALYTICS = "UA-21611117-5";
 	
 	
 	

@@ -15,7 +15,7 @@
   -->
 <resources>
     <!-- TODO: insert your analytics parameters here -->
-    <string name="ga_trackingId">UA-35397535-1</string>
+    <string name="ga_trackingId">UA-21611117-5</string>
     <bool name="ga_debug">false</bool>
     <bool name="ga_reportUncaughtExceptions">true</bool>
     <integer name="ga_sessionTimeout">120</integer>
