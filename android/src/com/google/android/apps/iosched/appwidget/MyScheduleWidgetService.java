@@ -136,7 +136,7 @@ public class MyScheduleWidgetService extends RemoteViewsService {
                                 R.string.schedule_empty_slot_title_template,
                                 TextUtils.isEmpty(blockTitle)
                                         ? ""
-                                        : (" " + blockTitle.toLowerCase())));
+                                        : (" " + blockTitle)));
                         rv.setTextColor(R.id.block_title,
                                 res.getColor(R.color.body_text_1_positive));
                         rv.setTextViewText(R.id.block_subtitle, mContext.getString(

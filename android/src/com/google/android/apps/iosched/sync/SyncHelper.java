@@ -66,6 +66,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import static com.google.android.apps.iosched.util.LogUtils.LOGD;
 import static com.google.android.apps.iosched.util.LogUtils.LOGI;
@@ -305,6 +306,16 @@ public class SyncHelper {
     private ArrayList<ContentProviderOperation> executeGet(String urlString, JSONHandler handler,
             boolean authenticated) throws IOException {
         LOGD(TAG, "Requesting URL: " + urlString);
+        // add locale - to get localized results
+        String locale = Locale.getDefault().toString();
+        if (locale != null) {
+        	if (urlString.contains("?")) {
+        		urlString += "&locale=" + locale;
+        	}
+        	else {
+        		urlString += "?locale=" + locale;
+        	}
+        }
         URL url = new URL(urlString);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestProperty("User-Agent", mUserAgent);

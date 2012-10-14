@@ -44,8 +44,8 @@
     <string name="title_search_query">Suche nach \"&lt;b&gt;<xliff:g id="query">%1$s</xliff:g>&lt;b&gt;\"</string>
 
     <string name="title_my_schedule">Meine Agenda</string>
-    <string name="title_explore">Stöbere</string>
-    <string name="title_stream">Stream</string>
+    <string name="title_explore">Erkunden</string>
+    <string name="title_stream">Google+ Stream</string>
 
     <plurals name="title_selected_sessions">
         <item quantity="one">1 Vortrag ausgewählt</item>
@@ -226,7 +226,7 @@
     </plurals>
 
     <!-- Strings only used for accessibility -->
-    <string name="speaker_googleplus_profile">Google+ profile: <xliff:g id="speakername">%1$s</xliff:g></string>
+    <string name="speaker_googleplus_profile">Google+ Profil: <xliff:g id="speakername">%1$s</xliff:g></string>
     <string name="close_detail_pane">Details schließen</string>
     <string name="more_sessions">Weitere Vorträge</string>
     <string name="plus_one_description">Berühren, um dein +1 zu den vorhanden <xliff:g id="name">%1$s</xliff:g> hinzuzufügen</string>

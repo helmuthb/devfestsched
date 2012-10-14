@@ -1,1 +1,1 @@
-{"rooms": [{"floor": "0", "id": "1", "name": "EI9"}, {"floor": "0", "id": "2", "name": "EI10"}, {"floor": "0", "id": "0", "name": "Main hall"}, {"floor": "1", "id": "3", "name": "Nelson's"}, {"floor": "2", "id": "4", "name": "Main room"}]}
+{"rooms": [{"floor": "0", "id": "ei9", "name": "EI9"}, {"floor": "0", "id": "ei10", "name": "EI10"}, {"floor": "0", "id": "mainhall", "name": "Main hall"}, {"floor": "1", "id": "nelsons", "name": "Nelson's"}, {"floor": "2", "id": "mainroom", "name": "Main room"}]}

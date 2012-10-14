@@ -342,7 +342,7 @@ public class MyScheduleFragment extends SherlockListFragment implements
                     titleView.setText(getString(R.string.schedule_empty_slot_title_template,
                             TextUtils.isEmpty(blockTitle)
                                     ? ""
-                                    : (" " + blockTitle.toLowerCase())));
+                                    : (" " + blockTitle)));
                     titleView.setTextColor(res.getColorStateList(R.color.body_text_1_positive));
                     subtitle = getString(R.string.schedule_empty_slot_subtitle);
                     extraButton.setVisibility(View.GONE);

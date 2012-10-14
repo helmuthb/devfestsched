@@ -27,3 +27,7 @@ local.properties
 # Sandbox stuff
 _sandbox
 
+
+android/proguard/usage.txt
+
+android/proguard/dump.txt
