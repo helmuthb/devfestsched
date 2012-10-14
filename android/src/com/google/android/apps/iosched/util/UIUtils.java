@@ -133,7 +133,8 @@ public class UIUtils {
         TimeZone.setDefault(getConferenceTimeZone());
         
     	SimpleDateFormat dateFormat = new SimpleDateFormat("Z");
-    	Date date = new Date();
+    	// Date date = new Date();
+    	Date date = new Date(Setup.CONFERENCE_START_MILLIS);
  
     	
     	//LogUtils.LOGE("getConferenceDST", dateFormat.format(date).substring(0, 3) + ":" + dateFormat.format(date).substring(dateFormat.format(date).length() - 2));
