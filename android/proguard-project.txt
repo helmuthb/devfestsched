@@ -23,3 +23,8 @@
 
 # Maps JavaScript interface proguard flags
 -keep class * implements com.google.android.apps.iosched.ui.MapFragment$MapJsi { *; }
+
+# for Google Play services
+-keep class * extends java.util.ListResourceBundle {
+    protected Object[][] getContents();
+}

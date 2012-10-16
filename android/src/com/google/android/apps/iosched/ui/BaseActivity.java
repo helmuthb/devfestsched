@@ -25,6 +25,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -43,16 +44,29 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import at.devfest.app.R;
+import com.google.android.gms.plus.PlusClient;
+import com.google.android.gms.common.*;
+import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
+import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
+import com.google.api.android.plus.GooglePlus;
 
 /**
  * A base activity that handles common functionality in the app.
  */
-public abstract class BaseActivity extends SherlockFragmentActivity {
+public abstract class BaseActivity extends SherlockFragmentActivity 
+		implements ConnectionCallbacks, OnConnectionFailedListener {
+	
+	protected PlusClient mPlusClient;
+	protected ConnectionResult mStatus;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EasyTracker.getTracker().setContext(this);
 
+        // initialize the G+ client
+        mPlusClient = new PlusClient(this, this, this);
+        
         // If we're not on Google TV and we're not authenticated, finish this activity
         // and show the authentication screen.
         if (!UIUtils.isGoogleTV(this)) {
@@ -197,11 +211,50 @@ public abstract class BaseActivity extends SherlockFragmentActivity {
     protected void onStart() {
         super.onStart();
         EasyTracker.getTracker().trackActivityStart(this);
+        mPlusClient.connect();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         EasyTracker.getTracker().trackActivityStop(this);
+        mPlusClient.disconnect();
+    }
+    
+    public void onConnectionFailed(ConnectionResult status) {
+    	// do nothing
+    }
+    
+    public void onConnected()
+    {
+    	// do nothing
+    }
+    
+    public void onDisconnected()
+    {
+    	// do nothing
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
+    	if (requestCode == GooglePlus.REQUEST_CODE_RESOLVE_FAILURE) {
+    		if (responseCode == RESULT_OK) {
+    			mStatus = null;
+    			mPlusClient.connect();
+    		}
+    	}
+    	else if (requestCode == GooglePlus.REQUEST_CODE_RESOLVE_MISSING_GP) {
+    		if (responseCode == RESULT_OK) {
+    			mPlusClient.connect();
+    		}
+    	}
+    	else {
+    		super.onActivityResult(requestCode, responseCode, intent);
+    	}
+    }
+    
+    // get the PlusClient from an activity
+    public static PlusClient getPlusClient(Activity act) {
+    	return ((BaseActivity)act).mPlusClient;
     }
 }

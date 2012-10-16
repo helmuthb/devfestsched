@@ -23,6 +23,10 @@ import android.content.Context;
  * Google Play Services.</a>
  */
 public final class GooglePlus {
+	public static final int PLUS_ONE_REQUEST_CODE = 1200;
+	public static final int REQUEST_CODE_RESOLVE_FAILURE = 1201;
+	public static final int REQUEST_CODE_RESOLVE_MISSING_GP = 1202;
+			
     public static GooglePlus initialize(Context context, String apiKey, String clientId) {
         return new GooglePlus();
     }

@@ -85,7 +85,7 @@ public class Config {
 	
 	public static final boolean FEATURE_MAP_ENABLED = false;
 	public static final boolean FEATURE_SESSION_URL_ENABLED = true;
-	public static final boolean FEATURE_PLUSONE_ENABLED = false;
+	public static final boolean FEATURE_PLUSONE_ENABLED = true;
 	
 	public static final String GOOGLE_ANALYTICS = "UA-21611117-5";
 	

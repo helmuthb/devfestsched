@@ -27,8 +27,13 @@ import com.google.android.apps.iosched.util.HelpUtils;
 import com.google.android.apps.iosched.util.ImageFetcher;
 import com.google.android.apps.iosched.util.SessionsHelper;
 import com.google.android.apps.iosched.util.UIUtils;
+// import com.google.api.android.plus.GooglePlus;
+// import com.google.api.android.plus.PlusOneButton;
+import com.google.android.gms.plus.PlusOneButton;
+import com.google.android.gms.common.*;
+import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
+import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
 import com.google.api.android.plus.GooglePlus;
-import com.google.api.android.plus.PlusOneButton;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -84,7 +89,6 @@ public class SessionDetailFragment extends SherlockFragment implements
     private long mSessionBlockStart;
     private long mSessionBlockEnd;
     private String mTitleString;
-    private String mImageUrl;
     private String mHashtags;
     private String mUrl;
     private String mRoomId;
@@ -104,7 +108,6 @@ public class SessionDetailFragment extends SherlockFragment implements
 
     private TextView mAbstract;
     private TextView mRequirements;
-    private ImageView mImage;
 
     private boolean mSessionCursor = false;
     private boolean mSpeakersCursor = false;
@@ -117,8 +120,6 @@ public class SessionDetailFragment extends SherlockFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        GooglePlus.initialize(getActivity(), Config.API_KEY, Config.CLIENT_ID);
 
         final Intent intent = BaseActivity.fragmentArgumentsToIntent(getArguments());
         mSessionUri = intent.getData();
@@ -160,8 +161,7 @@ public class SessionDetailFragment extends SherlockFragment implements
 
         mAbstract = (TextView) mRootView.findViewById(R.id.session_abstract);
         mRequirements = (TextView) mRootView.findViewById(R.id.session_requirements);
-        mImage = (ImageView) mRootView.findViewById(R.id.session_image);
-
+ 
 
         if (mVariableHeightHeader) {
             View headerView = mRootView.findViewById(R.id.header_session);
@@ -172,7 +172,15 @@ public class SessionDetailFragment extends SherlockFragment implements
 
         return mRootView;
     }
-
+   
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	if (!TextUtils.isEmpty(mUrl)) {
+    		mPlusOneButton.initialize(BaseActivity.getPlusClient(getActivity()), mUrl, GooglePlus.PLUS_ONE_REQUEST_CODE);
+    	}
+    }
+    
     @Override
     public void onStop() {
         super.onStop();
@@ -236,7 +244,6 @@ public class SessionDetailFragment extends SherlockFragment implements
             return;
         }
 
-        mImageUrl = cursor.getString(SessionsQuery.SESSION_IMAGE_URL);
         mTitleString = cursor.getString(SessionsQuery.TITLE);
 
         // Format time block this session occupies
@@ -247,11 +254,6 @@ public class SessionDetailFragment extends SherlockFragment implements
                 mTitleString, mSessionBlockStart, mSessionBlockEnd, mRoomName, getActivity());
 
         mTitle.setText(mTitleString);
-
-        if (!TextUtils.isEmpty(mImageUrl)) {
-            mImageFetcher.loadThumbnailImage(mImageUrl, mImage,
-                    R.drawable.person_image_empty);
-        }
 
         mUrl = cursor.getString(SessionsQuery.URL);
         if (TextUtils.isEmpty(mUrl)) {
@@ -277,7 +279,7 @@ public class SessionDetailFragment extends SherlockFragment implements
             mAbstract.setVisibility(View.GONE);
         }
 
-        mPlusOneButton.setSize(PlusOneButton.Size.TALL);
+        mPlusOneButton.setSize(PlusOneButton.SIZE_TALL);
         String url = cursor.getString(SessionsQuery.URL);
         /*
          * remove plus one button while no session URL is there
@@ -286,9 +288,9 @@ public class SessionDetailFragment extends SherlockFragment implements
         	url = "";
         }
         if (TextUtils.isEmpty(url)) {
-            mPlusOneButton.setVisibility(View.GONE);
+            // mPlusOneButton.setVisibility(View.GONE);
         } else {
-            mPlusOneButton.setUrl(url);
+            mPlusOneButton.initialize(BaseActivity.getPlusClient(getActivity()), url, GooglePlus.PLUS_ONE_REQUEST_CODE);
         }
 
         final View requirementsBlock = mRootView.findViewById(R.id.session_requirements_block);

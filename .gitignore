@@ -33,3 +33,5 @@ android/proguard/usage.txt
 android/proguard/dump.txt
 
 android/proguard/seeds.txt
+
+android/.settings/com.google.gdt.eclipse.core.prefs
