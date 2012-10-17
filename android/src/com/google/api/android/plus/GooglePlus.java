@@ -19,15 +19,10 @@ package com.google.api.android.plus;
 import android.content.Context;
 
 /**
- * Stub until the release of <a href="https://developers.google.com/android/google-play-services/">
- * Google Play Services.</a>
+ * Definition of constants used in connection with Google+ integration
  */
 public final class GooglePlus {
 	public static final int PLUS_ONE_REQUEST_CODE = 1200;
 	public static final int REQUEST_CODE_RESOLVE_FAILURE = 1201;
 	public static final int REQUEST_CODE_RESOLVE_MISSING_GP = 1202;
-			
-    public static GooglePlus initialize(Context context, String apiKey, String clientId) {
-        return new GooglePlus();
-    }
 }
