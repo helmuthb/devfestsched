@@ -57,8 +57,7 @@ import static com.google.android.apps.iosched.util.LogUtils.makeLogTag;
  * selection fragment ({@link ChooseAccountFragment}), and then an authentication progress fragment
  * ({@link AuthProgressFragment}).
  */
-public class AccountActivity extends SherlockFragmentActivity
-        implements AccountUtils.AuthenticateCallback {
+public class AccountActivity extends SherlockFragmentActivity {
 
     private static final String TAG = makeLogTag(AccountActivity.class);
 
@@ -71,7 +70,6 @@ public class AccountActivity extends SherlockFragmentActivity
 
     private Account mChosenAccount;
     private Intent mFinishIntent;
-    private boolean mCancelAuth = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,39 +88,7 @@ public class AccountActivity extends SherlockFragmentActivity
         }
     }
         
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_AUTHENTICATE) {
-            if (resultCode == RESULT_OK) {
-                tryAuthenticate();
-            } else {
-                // go back to previous step
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getSupportFragmentManager().popBackStack();
-                    }
-                });
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    private void tryAuthenticate() {
-        AccountUtils.tryAuthenticate(AccountActivity.this,
-                AccountActivity.this,
-                REQUEST_AUTHENTICATE,
-                mChosenAccount);
-    }
-
-    @Override
-    public boolean shouldCancelAuthentication() {
-        return mCancelAuth;
-    }
-
-    @Override
-    public void onAuthTokenAvailable(String authToken) {
+    public void onAccountChosen() {
         ContentResolver.setIsSyncable(mChosenAccount, ScheduleContract.CONTENT_AUTHORITY, 1);
 
         if (mFinishIntent != null) {
@@ -237,72 +203,10 @@ public class AccountActivity extends SherlockFragmentActivity
         @Override
         public void onListItemClick(ListView l, View v, int position, long id) {
             AccountActivity activity = (AccountActivity) getActivity();
-            ConnectivityManager cm = (ConnectivityManager)
-                    activity.getSystemService(CONNECTIVITY_SERVICE);
-            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-            if (activeNetwork == null || !activeNetwork.isConnected()) {
-                Toast.makeText(activity, R.string.no_connection_cant_login,
-                        Toast.LENGTH_SHORT).show();
-                return;
-            }
 
-            activity.mCancelAuth = false;
             activity.mChosenAccount = mAccountListAdapter.getItem(position);
-            activity.getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new AuthProgressFragment(),
-                            "loading")
-                    .addToBackStack("choose_account")
-                    .commit();
-
-            activity.tryAuthenticate();
-        }
-    }
-
-    /**
-     * This fragment shows a login progress spinner. Upon reaching a timeout of 7 seconds (in case
-     * of a poor network connection), the user can try again.
-     */
-    public static class AuthProgressFragment extends SherlockFragment {
-        private static final int TRY_AGAIN_DELAY_MILLIS = 7 * 1000; // 7 seconds
-
-        private final Handler mHandler = new Handler();
-
-        public AuthProgressFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_login_loading,
-                    container, false);
-
-            final View takingAWhilePanel = rootView.findViewById(R.id.taking_a_while_panel);
-            final View tryAgainButton = rootView.findViewById(R.id.retry_button);
-            tryAgainButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    getFragmentManager().popBackStack();
-                }
-            });
-
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (!isAdded()) {
-                        return;
-                    }
-
-                    takingAWhilePanel.setVisibility(View.VISIBLE);
-                }
-            }, TRY_AGAIN_DELAY_MILLIS);
-
-            return rootView;
-        }
-
-        @Override
-        public void onDetach() {
-            super.onDetach();
-            ((AccountActivity) getActivity()).mCancelAuth = true;
+            AccountUtils.setChosenAccountName(activity, activity.mChosenAccount.name);
+            activity.onAccountChosen();
         }
     }
 }

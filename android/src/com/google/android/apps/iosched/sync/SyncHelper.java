@@ -96,7 +96,6 @@ public class SyncHelper {
     private static final int LOCAL_VERSION_CURRENT = 19;
 
     private Context mContext;
-    private String mAuthToken;
     private String mUserAgent;
 
     public SyncHelper(Context context) {
@@ -113,8 +112,7 @@ public class SyncHelper {
      * @throws IOException
      */
     public void performSync(SyncResult syncResult, int flags) throws IOException {
-        mAuthToken = AccountUtils.getAuthToken(mContext);
-
+    	
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         final int localVersion = prefs.getInt("local_data_version", 0);
 
@@ -179,7 +177,7 @@ public class SyncHelper {
                         new SpeakersHandler(mContext, false), auth));
                 LOGI(TAG, "Remote syncing sessions");
                 batch.addAll(executeGet(Config.GET_ALL_SESSIONS_URL,
-                        new SessionsHandler(mContext, false, mAuthToken != null), auth));
+                        new SessionsHandler(mContext, false, false), auth));
                 LOGI(TAG, "Remote syncing sandbox");
                 batch.addAll(executeGet(Config.GET_SANDBOX_URL,
                         new SandboxHandler(mContext, false), auth));
@@ -200,10 +198,6 @@ public class SyncHelper {
                 if (syncResult != null) {
                     ++syncResult.stats.numAuthExceptions;
                 }
-                AccountUtils.invalidateAuthToken(mContext);
-                AccountUtils.tryAuthenticateWithErrorNotification(mContext, null,
-                        new Account(AccountUtils.getChosenAccountName(mContext),
-                                GoogleAccountManager.ACCOUNT_TYPE));
             }
             // all other IOExceptions are thrown
         }
@@ -268,7 +262,6 @@ public class SyncHelper {
 
     public void addOrRemoveSessionFromSchedule(Context context, String sessionId,
             boolean inSchedule) throws IOException {
-        mAuthToken = AccountUtils.getAuthToken(mContext);
         JsonObject starredSession = new JsonObject();
         starredSession.addProperty("sessionid", sessionId);
 
@@ -278,7 +271,6 @@ public class SyncHelper {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestProperty("User-Agent", mUserAgent);
         urlConnection.setRequestProperty("Content-Type", "application/json");
-        urlConnection.setRequestProperty("Authorization", "Bearer " + mAuthToken);
         urlConnection.setDoOutput(true);
         urlConnection.setFixedLengthStreamingMode(postJsonBytes.length);
 
@@ -319,9 +311,6 @@ public class SyncHelper {
         URL url = new URL(urlString);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestProperty("User-Agent", mUserAgent);
-        if (authenticated && mAuthToken != null) {
-            urlConnection.setRequestProperty("Authorization", "Bearer " + mAuthToken);
-        }
 
         urlConnection.connect();
         throwErrors(urlConnection);
