@@ -25,13 +25,6 @@ public class Setup implements ISetup {
 	public static final Class<?> getMyScheduleWidgetProviderClass() {
 		return at.devfest.app.appwidget.MyScheduleWidgetProvider.class;
 	}
-	
-	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-	public static final Class<?> getSessionCalendarServiceClass() {
-		return at.devfest.app.calendar.SessionCalendarService.class;
-	}
-	
-	
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public static final Class<?> getGoogleTVSessionLivestreamActivityClass() {

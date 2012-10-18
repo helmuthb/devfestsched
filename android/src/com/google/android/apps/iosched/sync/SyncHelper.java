@@ -32,7 +32,6 @@ import com.google.android.apps.iosched.io.TracksHandler;
 import com.google.android.apps.iosched.io.model.EditMyScheduleResponse;
 import com.google.android.apps.iosched.io.model.ErrorResponse;
 import com.google.android.apps.iosched.provider.ScheduleContract;
-import com.google.android.apps.iosched.calendar.SessionCalendarService;
 import com.google.android.apps.iosched.util.AccountUtils;
 import com.google.android.apps.iosched.util.UIUtils;
 import com.google.api.client.googleapis.extensions.android2.auth.GoogleAccountManager;
@@ -227,18 +226,6 @@ public class SyncHelper {
         } catch (OperationApplicationException e) {
             throw new RuntimeException("Problem applying batch operation", e);
         }
-
-        if (UIUtils.hasICS()) {
-            LOGD(TAG, "Done with sync'ing conference data. Starting to sync "
-                    + "session with Calendar.");
-            syncCalendar();
-        }
-    }
-
-    private void syncCalendar() {
-        Intent intent = new Intent(SessionCalendarService.ACTION_UPDATE_ALL_SESSIONS_CALENDAR);
-        intent.setClass(mContext, Setup.getSessionCalendarServiceClass());
-        mContext.startService(intent);
     }
 
     /**

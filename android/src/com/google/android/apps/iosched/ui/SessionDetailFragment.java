@@ -20,7 +20,6 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.apps.iosched.Config;
 
 import com.google.android.apps.iosched.calendar.SessionAlarmService;
-import com.google.android.apps.iosched.calendar.SessionCalendarService;
 import com.google.android.apps.iosched.provider.ScheduleContract;
 import com.google.android.apps.iosched.util.FractionalTouchDelegate;
 import com.google.android.apps.iosched.util.HelpUtils;
@@ -190,34 +189,6 @@ public class SessionDetailFragment extends SherlockFragment implements
         }
 
         if (mInitStarred != mStarred) {
-            // Update Calendar event through the Calendar API on Android 4.0 or new versions.
-            if (UIUtils.hasICS()) {
-                Intent intent;
-                if (mStarred) {
-                    // Set up intent to add session to Calendar, if it doesn't exist already.
-                    intent = new Intent(SessionCalendarService.ACTION_ADD_SESSION_CALENDAR,
-                            mSessionUri);
-                    intent.putExtra(SessionCalendarService.EXTRA_SESSION_BLOCK_START,
-                            mSessionBlockStart);
-                    intent.putExtra(SessionCalendarService.EXTRA_SESSION_BLOCK_END,
-                            mSessionBlockEnd);
-                    intent.putExtra(SessionCalendarService.EXTRA_SESSION_ROOM, mRoomName);
-                    intent.putExtra(SessionCalendarService.EXTRA_SESSION_TITLE, mTitleString);
-
-                } else {
-                    // Set up intent to remove session from Calendar, if exists.
-                    intent = new Intent(SessionCalendarService.ACTION_REMOVE_SESSION_CALENDAR,
-                            mSessionUri);
-                    intent.putExtra(SessionCalendarService.EXTRA_SESSION_BLOCK_START,
-                            mSessionBlockStart);
-                    intent.putExtra(SessionCalendarService.EXTRA_SESSION_BLOCK_END,
-                            mSessionBlockEnd);
-                    intent.putExtra(SessionCalendarService.EXTRA_SESSION_TITLE, mTitleString);
-                }
-                intent.setClass(getActivity(), Setup.getSessionCalendarServiceClass());
-                getActivity().startService(intent);
-            }
-
             if (mStarred && System.currentTimeMillis() < mSessionBlockStart) {
                 setupNotification();
             }

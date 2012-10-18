@@ -16,7 +16,6 @@
 
 package com.google.android.apps.iosched.util;
 
-import com.google.android.apps.iosched.calendar.SessionCalendarService;
 import com.google.android.apps.iosched.provider.ScheduleContract;
 import com.google.android.apps.iosched.ui.AccountActivity;
 import com.google.android.gcm.GCMRegistrar;
@@ -56,18 +55,6 @@ public class AccountUtils {
     }
 
     public static void signOut(final Context context) {
-        // Clear out all Google I/O-created sessions from Calendar
-        if (UIUtils.hasICS()) {
-            LOGI(TAG, "Clearing all sessions from Google Calendar using SessionCalendarService.");
-            Toast.makeText(context, R.string.toast_deleting_sessions_from_calendar,
-                    Toast.LENGTH_LONG).show();
-            context.startService(
-                    new Intent(SessionCalendarService.ACTION_CLEAR_ALL_SESSIONS_CALENDAR)
-                            .setClass(context, Setup.getSessionCalendarServiceClass())
-                            .putExtra(SessionCalendarService.EXTRA_ACCOUNT_NAME,
-                                    getChosenAccountName(context)));
-        }
-
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         sp.edit().clear().commit();
         context.getContentResolver().delete(ScheduleContract.BASE_CONTENT_URI, null, null);
