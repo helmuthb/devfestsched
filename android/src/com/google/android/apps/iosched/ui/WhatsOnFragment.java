@@ -24,6 +24,7 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -115,45 +116,51 @@ public class WhatsOnFragment extends Fragment implements
                 Announcements.CONTENT_URI, true, mObserver);
     }
 
-    /**
-     * Event that updates countdown timer. Posts itself again to
-     * {@link #mHandler} to continue updating time.
-     */
     private final Runnable mCountdownRunnable = new Runnable() {
-        public void run() {
+    	public void run() {
             int remainingSec = (int) Math.max(0,
                     (UIUtils.CONFERENCE_START_MILLIS - UIUtils
                             .getCurrentTime(getActivity())) / 1000);
-            final boolean conferenceStarted = remainingSec == 0;
-
+            final boolean conferenceStarted = remainingSec <= 1;
             if (conferenceStarted) {
-                // Conference started while in countdown mode, switch modes and
-                // bail on future countdown updates.
-                mHandler.postDelayed(new Runnable() {
-                    public void run() {
-                        refresh();
-                    }
-                }, 100);
-                return;
+            	mHandler.postDelayed(new Runnable() {
+            		public void run() {
+            			refresh();
+            		}
+            	}, 1000);
             }
-
-            final int secs = remainingSec % 86400;
-            final int days = remainingSec / 86400;
-            final String str;
-            if (days == 0) {
-                str = getResources().getString(
-                        R.string.whats_on_countdown_title_0,
-                        DateUtils.formatElapsedTime(secs));
-            } else {
-                str = getResources().getQuantityString(
-                        R.plurals.whats_on_countdown_title, days, days,
-                        DateUtils.formatElapsedTime(secs));
-            }
-            mCountdownTextView.setText(str);
-
-            // Repost ourselves to keep updating countdown
-            mHandler.postDelayed(mCountdownRunnable, 1000);
-        }
+    		new CountDownTimer(remainingSec * 1000L, 1000) {
+    			public void onTick(long millisUntil) {
+    				try {
+    					int remainingSec = (int)(millisUntil / 1000L);
+    					final int secs = remainingSec % 86400;
+    					final int days = remainingSec / 86400;
+    					final String str;
+    					if (days == 0) {
+    						str = getResources().getString(
+    								R.string.whats_on_countdown_title_0,
+    								DateUtils.formatElapsedTime(secs));
+    					} else {
+    						str = getResources().getQuantityString(
+    								R.plurals.whats_on_countdown_title, days, days,
+    								DateUtils.formatElapsedTime(secs));
+    					}
+    					mCountdownTextView.setText(str);
+    				}
+    				catch (Exception e) {
+    					cancel();
+    				}
+    			}
+    			public void onFinish() {
+    				try {
+    					refresh();
+    				}
+    				catch (Exception e) {
+    					// do nothing, the counter is already finished
+    				}
+    			}
+    		}.start();
+    	}
     };
 
     @Override

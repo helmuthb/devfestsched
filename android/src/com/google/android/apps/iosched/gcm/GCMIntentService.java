@@ -116,7 +116,7 @@ public class GCMIntentService extends GCMBaseIntentService {
                         .setContentText(message)
                         .setContentIntent(
                                 PendingIntent.getActivity(context, 0,
-                                        new Intent(context, Setup.AccountActivityClass)
+                                        new Intent(context, Setup.HomeActivityClass)
                                                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                                                         Intent.FLAG_ACTIVITY_SINGLE_TOP),
                                         0))

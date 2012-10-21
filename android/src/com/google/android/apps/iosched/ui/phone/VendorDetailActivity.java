@@ -60,7 +60,7 @@ public class VendorDetailActivity extends SimpleSinglePaneActivity implements
                 parentIntent = new Intent(Intent.ACTION_VIEW,
                         ScheduleContract.Tracks.buildTrackUri(mTrackId));
             } else {
-                parentIntent = new Intent(this, Setup.AccountActivityClass);
+                parentIntent = new Intent(this, Setup.HomeActivityClass);
             }
 
             NavUtils.navigateUpTo(this, parentIntent);

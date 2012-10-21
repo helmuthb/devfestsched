@@ -122,7 +122,7 @@ public class SyncHelper {
 
         LOGI(TAG, "Performing sync");
 
-        if ((flags & FLAG_SYNC_LOCAL) != 0) {
+        if ((flags & FLAG_SYNC_LOCAL) == 0) {
             final long startLocal = System.currentTimeMillis();
             final boolean localParse = localVersion < LOCAL_VERSION_CURRENT;
             LOGD(TAG, "found localVersion=" + localVersion + " and LOCAL_VERSION_CURRENT="
@@ -171,6 +171,15 @@ public class SyncHelper {
                 boolean auth = !UIUtils.isGoogleTV(mContext) &&
                         AccountUtils.isAuthenticated(mContext);
                 final long startRemote = System.currentTimeMillis();
+                LOGI(TAG, "Remote syncing rooms");
+                batch.addAll(executeGet(Config.GET_ALL_ROOMS_URL,
+                		new RoomsHandler(mContext), auth));
+                LOGI(TAG, "Remote syncing common slots");
+                batch.addAll(executeGet(Config.GET_COMMON_SLOTS_URL,
+                		new BlocksHandler(mContext), auth));
+                LOGI(TAG, "Remote syncing tracks");
+                batch.addAll(executeGet(Config.GET_ALL_TRACKS_URL,
+                		new TracksHandler(mContext), auth));
                 LOGI(TAG, "Remote syncing speakers");
                 batch.addAll(executeGet(Config.GET_ALL_SPEAKERS_URL,
                         new SpeakersHandler(mContext, false), auth));
@@ -183,6 +192,9 @@ public class SyncHelper {
                 LOGI(TAG, "Remote syncing announcements");
                 batch.addAll(executeGet(Config.GET_ALL_ANNOUNCEMENTS_URL,
                         new AnnouncementsHandler(mContext, false), auth));
+                LOGI(TAG, "Remote syncing common slots");
+                batch.addAll(executeGet(Config.GET_ALL_SUGGESTS_URL,
+                		new SearchSuggestHandler(mContext), auth));
                 // GET_ALL_SESSIONS covers the functionality GET_MY_SCHEDULE provides here.
                 LOGD(TAG, "Remote sync took " + (System.currentTimeMillis() - startRemote) + "ms");
                 if (syncResult != null) {

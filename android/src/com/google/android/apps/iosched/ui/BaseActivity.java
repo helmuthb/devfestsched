@@ -67,15 +67,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity
         // initialize the G+ client
         mPlusClient = new PlusClient(this, this, this);
         
-        // If we're not on Google TV and we're not authenticated, finish this activity
-        // and show the authentication screen.
-        if (!UIUtils.isGoogleTV(this)) {
-            if (!AccountUtils.isAuthenticated(this)) {
-                AccountUtils.startAuthenticationFlow(this, getIntent());
-                finish();
-            }
-        }
-
         // If Android Beam APIs are available, set up the Beam easter egg as the default Beam
         // content. This can be overridden by subclasses.
         if (UIUtils.hasICS()) {

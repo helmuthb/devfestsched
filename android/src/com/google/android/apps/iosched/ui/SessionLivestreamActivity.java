@@ -670,7 +670,7 @@ public class SessionLivestreamActivity extends BaseActivity implements
     private void navigateUpOrFinish() {
         if (mLoadFromExtras || isKeynote) {
             final Intent homeIntent = new Intent();
-            homeIntent.setClass(this, Setup.AccountActivityClass);
+            homeIntent.setClass(this, Setup.HomeActivityClass);
             NavUtils.navigateUpTo(this, homeIntent);
         } else if (mSessionUri != null) {
             final Intent parentIntent = new Intent(Intent.ACTION_VIEW, mSessionUri);

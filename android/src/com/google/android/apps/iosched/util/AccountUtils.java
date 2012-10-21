@@ -16,20 +16,9 @@
 
 package com.google.android.apps.iosched.util;
 
-import com.google.android.apps.iosched.provider.ScheduleContract;
-import com.google.android.apps.iosched.ui.AccountActivity;
-import com.google.android.gcm.GCMRegistrar;
+import android.accounts.AccountManager;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.widget.Toast;
-import at.devfest.Setup;
-import at.devfest.app.R;
-
-import static com.google.android.apps.iosched.util.LogUtils.LOGE;
-import static com.google.android.apps.iosched.util.LogUtils.LOGI;
 import static com.google.android.apps.iosched.util.LogUtils.makeLogTag;
 
 /**
@@ -38,33 +27,11 @@ import static com.google.android.apps.iosched.util.LogUtils.makeLogTag;
 public class AccountUtils {
     private static final String TAG = makeLogTag(AccountUtils.class);
 
-    private static final String PREF_CHOSEN_ACCOUNT = "chosen_account";
-
     public static boolean isAuthenticated(final Context context) {
         return !TextUtils.isEmpty(getChosenAccountName(context));
     }
 
     public static String getChosenAccountName(final Context context) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        return sp.getString(PREF_CHOSEN_ACCOUNT, null);
-    }
-
-    public static void setChosenAccountName(final Context context, final String accountName) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-                        sp.edit().putString(PREF_CHOSEN_ACCOUNT, accountName).commit();
-    }
-
-    public static void signOut(final Context context) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        sp.edit().clear().commit();
-        context.getContentResolver().delete(ScheduleContract.BASE_CONTENT_URI, null, null);
-        GCMRegistrar.unregister(context);
-    }
-
-    public static void startAuthenticationFlow(final Context context, final Intent finishIntent) {
-        Intent loginFlowIntent = new Intent(context, Setup.AccountActivityClass);
-        loginFlowIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        loginFlowIntent.putExtra(AccountActivity.EXTRA_FINISH_INTENT, finishIntent);
-        context.startActivity(loginFlowIntent);
+        return AccountManager.get(context).getAccounts()[0].name;
     }
 }

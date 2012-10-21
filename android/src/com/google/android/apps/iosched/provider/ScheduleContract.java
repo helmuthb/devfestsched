@@ -360,7 +360,8 @@ public class ScheduleContract {
          * the requested {@link #TRACK_ID}.
          */
         public static Uri buildVendorsUri(String trackId) {
-            return CONTENT_URI.buildUpon().appendPath(trackId).appendPath(PATH_VENDORS).build();
+            // return CONTENT_URI.buildUpon().appendPath(trackId).appendPath(PATH_VENDORS).build();
+        	return Vendors.CONTENT_URI;
         }
 
         /** Read {@link #TRACK_ID} from {@link Tracks} {@link Uri}. */

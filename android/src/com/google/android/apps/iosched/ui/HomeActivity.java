@@ -358,11 +358,6 @@ public class HomeActivity extends BaseActivity implements
                 HelpUtils.showAbout(this);
                 return true;
 
-            case R.id.menu_sign_out:
-                AccountUtils.signOut(this);
-                finish();
-                return true;
-
             case R.id.menu_beam:
                 Intent beamIntent = new Intent(this, Setup.BeamActivityClass);
                 startActivity(beamIntent);

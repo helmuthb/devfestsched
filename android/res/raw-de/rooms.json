@@ -1,1 +1,1 @@
-{"rooms": [{"floor": "0", "id": "ei9", "name": "EI9"}, {"floor": "0", "id": "ei10", "name": "EI10"}, {"floor": "0", "id": "mainhall", "name": "Vorraum"}, {"floor": "1", "id": "nelsons", "name": "Nelson's"}, {"floor": "2", "id": "mainroom", "name": "Hauptraum"}]}
+{"etag":"W/\"7d82d2e0299752ea2e5a4099ca11974f\"","rooms":[{"id":"ei09","name":"EI9","floor":"0"},{"id":"ei10","name":"EI10","floor":"0"},{"id":"nelsons","name":"Nelson's","floor":"1"},{"id":"mainhall","name":"Vorraum","floor":"0"},{"id":"mainroom","name":"Hauptraum","floor":"2"}]}

@@ -11,8 +11,6 @@ public interface ISetup {
 
 	public static final Class<?> HomeActivityClass = at.devfest.app.ui.HomeActivity.class;
 
-	public static final Class<?> AccountActivityClass = at.devfest.app.ui.AccountActivity.class;
-
 //	public static final Class<?> SessionLivestreamActivityClass = at.devfest.app.ui.SessionLivestreamActivity.class;
 	public static final Class<?> SessionAlarmServiceClass = at.devfest.app.calendar.SessionAlarmService.class;
 //	public static final Class<?> SessionCalendarServiceClass = at.devfest.app.calendar.SessionCalendarService.class;
