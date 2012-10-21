@@ -17,7 +17,6 @@ public interface ISetup {
 	public static final Class<?> SessionAlarmServiceClass = at.devfest.app.calendar.SessionAlarmService.class;
 //	public static final Class<?> SessionCalendarServiceClass = at.devfest.app.calendar.SessionCalendarService.class;
 
-	public static final Class<?> ScheduleUpdaterServiceClass = at.devfest.app.sync.ScheduleUpdaterService.class;
 	public static final Class<?> SocialStreamActivityClass = at.devfest.app.ui.SocialStreamActivity.class;
 
 //	public static final Class<?> GoogleTVSessionLivestreamActivityClass = at.devfest.app.ui.gtv.GoogleTVSessionLivestreamActivity.class;

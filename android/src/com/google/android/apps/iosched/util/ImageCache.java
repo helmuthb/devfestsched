@@ -330,46 +330,11 @@ public class ImageCache {
         // Check if media is mounted or storage is built-in, if so, try and use external cache dir
         // otherwise use internal cache dir
         final String cachePath =
-                Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ||
-                        !isExternalStorageRemovable() ?
-                        getExternalCacheDir(context).getPath() :
                         context.getCacheDir().getPath();
 
         return new File(cachePath + File.separator + uniqueName);
     }
 
-    /**
-     * Check if external storage is built-in or removable.
-     *
-     * @return True if external storage is removable (like an SD card), false
-     *         otherwise.
-     */
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-    public static boolean isExternalStorageRemovable() {
-        if (UIUtils.hasGingerbread()) {
-            return Environment.isExternalStorageRemovable();
-        }
-        return true;
-    }
-
-    /**
-     * Get the external app cache directory.
-     *
-     * @param context The context to use
-     * @return The external cache dir
-     */
-    public static File getExternalCacheDir(Context context) {
-        if (hasExternalCacheDir()) {
-            File cacheDir = context.getExternalCacheDir();
-            if (cacheDir != null) {
-                return cacheDir;
-            }
-        }
-
-        // Before Froyo we need to construct the external cache dir ourselves
-        final String cacheDir = "/Android/data/" + context.getPackageName() + "/cache/";
-        return new File(Environment.getExternalStorageDirectory().getPath() + cacheDir);
-    }
 
     /**
      * Check how much usable space is available at a given path.
@@ -386,14 +351,7 @@ public class ImageCache {
         return (long) stats.getBlockSize() * (long) stats.getAvailableBlocks();
     }
 
-    /**
-     * Check if OS version has built-in external cache dir method.
-     */
-    public static boolean hasExternalCacheDir() {
-        return UIUtils.hasFroyo();
-    }
-
-    /**
+     /**
      * A hashing method that changes a string (like a URL) into a hash suitable for using as a
      * disk filename.
      */

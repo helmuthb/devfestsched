@@ -20,7 +20,6 @@ import com.google.analytics.tracking.android.EasyTracker;
 
 import com.google.android.apps.iosched.appwidget.MyScheduleWidgetProvider;
 import com.google.android.apps.iosched.provider.ScheduleContract;
-import com.google.android.apps.iosched.sync.ScheduleUpdaterService;
 import com.google.android.apps.iosched.ui.MapFragment;
 import com.google.android.apps.iosched.ui.SocialStreamFragment;
 
@@ -124,13 +123,6 @@ public final class SessionsHelper {
         final Intent refreshIntent = new Intent(mActivity, Setup.getMyScheduleWidgetProviderClass());
         refreshIntent.setAction(MyScheduleWidgetProvider.REFRESH_ACTION);
         mActivity.sendBroadcast(refreshIntent);
-
-        // Sync to the cloud.
-        final Intent updateServerIntent = new Intent(mActivity, Setup.ScheduleUpdaterServiceClass);
-        updateServerIntent.putExtra(ScheduleUpdaterService.EXTRA_SESSION_ID,
-                ScheduleContract.Sessions.getSessionId(sessionUri));
-        updateServerIntent.putExtra(ScheduleUpdaterService.EXTRA_IN_SCHEDULE, starred);
-        mActivity.startService(updateServerIntent);
     }
 
     public void startSocialStream(String hashtags) {

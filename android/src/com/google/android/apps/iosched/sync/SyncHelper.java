@@ -247,41 +247,6 @@ public class SyncHelper {
         return context.getPackageName() + "/" + versionName + " (" + versionCode + ") (gzip)";
     }
 
-    public void addOrRemoveSessionFromSchedule(Context context, String sessionId,
-            boolean inSchedule) throws IOException {
-        JsonObject starredSession = new JsonObject();
-        starredSession.addProperty("sessionid", sessionId);
-
-        byte[] postJsonBytes = new Gson().toJson(starredSession).getBytes();
-
-        URL url = new URL(Config.EDIT_MY_SCHEDULE_URL + (inSchedule ? "add" : "remove"));
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setRequestProperty("User-Agent", mUserAgent);
-        urlConnection.setRequestProperty("Content-Type", "application/json");
-        urlConnection.setDoOutput(true);
-        urlConnection.setFixedLengthStreamingMode(postJsonBytes.length);
-
-        LOGD(TAG, "Posting to URL: " + url);
-        OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
-        out.write(postJsonBytes);
-        out.flush();
-
-        urlConnection.connect();
-        throwErrors(urlConnection);
-        String json = readInputStream(urlConnection.getInputStream());
-        EditMyScheduleResponse response = new Gson().fromJson(json,
-                EditMyScheduleResponse.class);
-        if (!response.success) {
-            String responseMessageLower = (response.message != null)
-                    ? response.message.toLowerCase()
-                    : "";
-
-            if (responseMessageLower.contains("no profile")) {
-                throw new HandlerException.NoDevsiteProfileException();
-            }
-        }
-    }
-
     private ArrayList<ContentProviderOperation> executeGet(String urlString, JSONHandler handler,
             boolean authenticated) throws IOException {
         LOGD(TAG, "Requesting URL: " + urlString);
