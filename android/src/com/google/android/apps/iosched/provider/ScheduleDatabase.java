@@ -56,7 +56,7 @@ public class ScheduleDatabase extends SQLiteOpenHelper {
     private static final int VER_LAUNCH = 25;
     private static final int VER_SESSION_TYPE = 26;
 
-    private static final int DATABASE_VERSION = VER_SESSION_TYPE;
+    private static final int DATABASE_VERSION = 27;
 
     interface Tables {
         String BLOCKS = "blocks";
