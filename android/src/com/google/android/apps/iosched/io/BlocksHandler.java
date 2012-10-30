@@ -52,6 +52,13 @@ public class BlocksHandler extends JSONHandler {
             Gson gson = new Gson();
             EventSlots eventSlots = gson.fromJson(json, EventSlots.class);
             int numDays = eventSlots.day.length;
+            // first step: clear existing slots if something returned
+            if (numDays > 0) {
+            	batch.add(ContentProviderOperation
+            			.newDelete(ScheduleContract.addCallerIsSyncAdapterParameter(
+            					Blocks.CONTENT_URI))
+            			.build());
+            }
             //2011-05-10T07:00:00.000-07:00
             for (int i = 0; i < numDays; i++) {
                 Day day = eventSlots.day[i];

@@ -92,7 +92,7 @@ public class SyncHelper {
     public static final int FLAG_SYNC_LOCAL = 0x1;
     public static final int FLAG_SYNC_REMOTE = 0x2;
 
-    private static final int LOCAL_VERSION_CURRENT = 19;
+    private static final int LOCAL_VERSION_CURRENT = 20;
 
     private Context mContext;
     private String mUserAgent;
@@ -122,7 +122,7 @@ public class SyncHelper {
 
         LOGI(TAG, "Performing sync");
 
-        if ((flags & FLAG_SYNC_LOCAL) == 0) {
+        if ((flags & FLAG_SYNC_LOCAL) != 0) {
             final long startLocal = System.currentTimeMillis();
             final boolean localParse = localVersion < LOCAL_VERSION_CURRENT;
             LOGD(TAG, "found localVersion=" + localVersion + " and LOCAL_VERSION_CURRENT="
@@ -130,6 +130,7 @@ public class SyncHelper {
             // Only run local sync if there's a newer version of data available
             // than what was last locally-sync'd.
             if (localParse) {
+            	try {
                 // Load static local data
                 batch.addAll(new RoomsHandler(mContext).parse(
                         JSONHandler.loadResourceJson(mContext, R.raw.rooms)));
@@ -150,6 +151,10 @@ public class SyncHelper {
                     ++syncResult.stats.numUpdates;
                     ++syncResult.stats.numEntries;
                 }
+            	}
+            	catch (Exception e) {
+            		// do nothing
+            	}
             }
 
             LOGD(TAG, "Local sync took " + (System.currentTimeMillis() - startLocal) + "ms");
@@ -158,9 +163,9 @@ public class SyncHelper {
                 // Apply all queued up batch operations for local data.
                 resolver.applyBatch(ScheduleContract.CONTENT_AUTHORITY, batch);
             } catch (RemoteException e) {
-                throw new RuntimeException("Problem applying batch operation", e);
+                // throw new RuntimeException("Problem applying batch operation", e);
             } catch (OperationApplicationException e) {
-                throw new RuntimeException("Problem applying batch operation", e);
+                // throw new RuntimeException("Problem applying batch operation", e);
             }
 
             batch = new ArrayList<ContentProviderOperation>();
@@ -210,6 +215,9 @@ public class SyncHelper {
                     ++syncResult.stats.numAuthExceptions;
                 }
             }
+            catch (Exception e) {
+            	// do nothing
+            }
             // all other IOExceptions are thrown
         }
 
@@ -234,9 +242,9 @@ public class SyncHelper {
             resolver.applyBatch(ScheduleContract.CONTENT_AUTHORITY, batch);
             LOGD(TAG, "Deleted " + numDeletedEmptyBlocks + " empty session blocks.");
         } catch (RemoteException e) {
-            throw new RuntimeException("Problem applying batch operation", e);
+            // throw new RuntimeException("Problem applying batch operation", e);
         } catch (OperationApplicationException e) {
-            throw new RuntimeException("Problem applying batch operation", e);
+            // throw new RuntimeException("Problem applying batch operation", e);
         }
     }
 

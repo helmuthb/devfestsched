@@ -46,8 +46,8 @@ import android.support.v4.app.NavUtils;
 import at.devfest.app.R;
 import com.google.android.gms.plus.PlusClient;
 import com.google.android.gms.common.*;
-import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
-import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
+import com.google.android.gms.common.GooglePlayServicesClient.*;
+// import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
 import com.google.api.android.plus.GooglePlus;
 
 /**

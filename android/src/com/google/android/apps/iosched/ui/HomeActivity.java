@@ -21,6 +21,7 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.apps.iosched.Config;
 import com.google.android.apps.iosched.gcm.ServerUtilities;
 import com.google.android.apps.iosched.provider.ScheduleContract;
+import com.google.android.apps.iosched.sync.SyncHelper;
 import com.google.android.apps.iosched.util.AccountUtils;
 import com.google.android.apps.iosched.util.BeamUtils;
 import com.google.android.apps.iosched.util.HelpUtils;
@@ -36,6 +37,7 @@ import android.accounts.Account;
 import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SyncStatusObserver;
 import android.os.AsyncTask;
@@ -86,6 +88,7 @@ public class HomeActivity extends BaseActivity implements
     private ViewPager mViewPager;
     private Menu mOptionsMenu;
     private AsyncTask<Void, Void, Void> mGCMRegisterTask;
+    private AsyncTask<Context, Void, Void>mSyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,26 @@ public class HomeActivity extends BaseActivity implements
         if (isFinishing()) {
             return;
         }
+        
+        // to be sure users see <em>something</em>, let's sync the content now
+        mSyncTask = new AsyncTask<Context,Void,Void>() {
+        	@Override
+        	protected Void doInBackground(Context...contexts) {
+        		try {
+        		SyncHelper sh = new SyncHelper(contexts[0]);
+        		sh.performSync(null, SyncHelper.FLAG_SYNC_LOCAL|SyncHelper.FLAG_SYNC_REMOTE);
+        		}
+        		catch (Exception e) {
+        			// do nothing but ignore the exception
+        		}
+        		return null;
+        	}
+            @Override
+            protected void onPostExecute(Void result) {
+                mSyncTask = null;
+            }
+        };
+        mSyncTask.execute(this);
 
         UIUtils.enableDisableActivities(this);
         EasyTracker.getTracker().setContext(this);

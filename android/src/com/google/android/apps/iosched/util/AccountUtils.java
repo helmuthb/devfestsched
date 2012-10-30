@@ -16,6 +16,8 @@
 
 package com.google.android.apps.iosched.util;
 
+import com.google.api.client.googleapis.extensions.android2.auth.GoogleAccountManager;
+
 import android.accounts.AccountManager;
 import android.content.Context;
 import android.text.TextUtils;
@@ -32,6 +34,6 @@ public class AccountUtils {
     }
 
     public static String getChosenAccountName(final Context context) {
-        return AccountManager.get(context).getAccounts()[0].name;
+        return AccountManager.get(context).getAccountsByType(GoogleAccountManager.ACCOUNT_TYPE)[0].name;
     }
 }
