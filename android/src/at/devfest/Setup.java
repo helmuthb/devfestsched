@@ -9,7 +9,7 @@ import com.google.android.apps.iosched.util.ParserUtils;
 
 public class Setup implements ISetup {
 
-	public static String CONFERENCE_HASHTAG = "#devfest";
+	public static String CONFERENCE_HASHTAG = "#devfest #vie";
 
 	public static TimeZone CONFERENCE_TIME_ZONE = TimeZone.getTimeZone("Europe/Vienna");
 	
